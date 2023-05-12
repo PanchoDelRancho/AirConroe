@@ -1,91 +1,164 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from './page.module.css'
-
-const inter = Inter({ subsets: ['latin'] })
+"use client";
+import {
+  Card,
+  CardBody,
+  Text,
+  Button,
+  Box,
+  useColorMode,
+  useBreakpointValue,
+  Flex,
+} from "@chakra-ui/react";
 
 export default function Home() {
+  const { colorMode } = useColorMode();
+  const breakpointValue = useBreakpointValue({
+    base: "base",
+    md: "medium",
+    lg: "large",
+  });
+  const lightTitle = "rgba(255, 255, 255, 0.75)";
+  const darkTitle = "rgba(26, 32, 44, 0.30)";
+
+  const lightCard = "rgba(255, 255, 255, 0.90)";
+  const darkCard = "rgba(26, 32, 44, 0.90)";
+  const getTitleColor = () => {
+    return colorMode === "light" ? lightTitle : darkTitle;
+  };
+  const getCardColor = () => {
+    return colorMode === "light" ? lightCard : darkCard;
+  };
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <Box
+      bgImage={
+        breakpointValue === "large"
+          ? "url('/images/lightanddarkhousepixel.png')"
+          : colorMode === "light"
+          ? "url('/images/lightside.png')"
+          : "url('/images/darkside.png')"
+      }
+      bgSize="cover"
+      height="100%"
+      bgAttachment="fixed"
+    >
+      <Box className="about" mx={breakpointValue !== "base" ? "15vw" : ".5rem"}>
+        <Box h="95vh">
+          <Box
+            h="40vh"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
           >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-        <div className={styles.thirteen}>
-          <Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
-        </div>
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+            <Flex direction="column">
+              <Button colorScheme="yellow" fontSize="5vh" h="10vh">
+                Urgent Service
+              </Button>
+              <Button
+                as="a"
+                href="/Schedule"
+                colorScheme="blue"
+                fontSize="5vh"
+                h="10vh"
+                mt="5vh"
+              >
+                Schedule
+              </Button>
+            </Flex>
+          </Box>
+          <Card size="lg" align="center" h="45vh" bg={getCardColor()} mb="10vh">
+            <CardBody align="center">
+              <Text
+                display="flex"
+                fontSize="xl"
+                px="5vw"
+                alignItems="center"
+                h="100%"
+              >
+                We understand the frustration of dealing with a malfunctioning
+                air conditioning system. If you require immediate assistance,
+                please click the 'Urgent Service' button above and our team will
+                promptly contact you to address the issue.
+              </Text>
+            </CardBody>
+          </Card>
+        </Box>
+      </Box>
+      <Box className="about" mx={breakpointValue !== "base" ? "15vw" : ".5rem"}>
+        <Box h="95vh">
+          <Box
+            h="40vh"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Button
+              background={getTitleColor()}
+              fontSize="5vh"
+              backdropFilter="invert(70%)"
+              h="10vh"
+            >
+              About Us
+            </Button>
+          </Box>
+          <Card size="lg" align="center" h="47vh" bg={getCardColor()} mb="10vh">
+            <CardBody align="center">
+              <Text
+                display="flex"
+                fontSize="xl"
+                px="5vw"
+                alignItems="center"
+                h="100%"
+              >
+                We are a team of experienced air conditioning specialists
+                dedicated to providing top-quality service. No matter the issue
+                you're facing with your system, we have the knowledge and
+                expertise to fix it efficiently and effectively. We prioritize
+                your comfort and the air quality of your home, so you can rest
+                easy knowing that you're in good hands.
+              </Text>
+            </CardBody>
+          </Card>
+        </Box>
+      </Box>
+      <Box className="about" mx={breakpointValue !== "base" ? "15vw" : ".5rem"}>
+        <Box h="95vh">
+          <Box
+            h="40vh"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Button
+              as="a"
+              href="/Contact"
+              background={getTitleColor()}
+              fontSize="5vh"
+              backdropFilter="invert(70%)"
+              h="10vh"
+            >
+              Contact Us
+            </Button>
+          </Box>
+          <Card size="lg" align="center" h="45vh" bg={getCardColor()} mb="10vh">
+            <CardBody align="center">
+              <Text
+                display="flex"
+                fontSize="xl"
+                px="5vw"
+                alignItems="center"
+                h="100%"
+              >
+                We hope you found our website informative and helpful. If you
+                have any concerns about submitting your information online,
+                please feel free to contact us by phone. Our number is available
+                in the contact section, or you can click the 'Contact Us' button
+                above. We are always happy to assist you in any way we can.
+              </Text>
+            </CardBody>
+          </Card>
+        </Box>
+      </Box>
+    </Box>
+  );
 }
