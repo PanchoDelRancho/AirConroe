@@ -47,7 +47,7 @@ function Cal() {
       setEvents(formattedEvents);
     }
     getEvents();
-  }, []);
+  }, [isModalOpen]);
 
   const handleModalClose = () => {
     setIsModalOpen(false);
